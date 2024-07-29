@@ -5,6 +5,9 @@
 	margin: 0;
 	padding: 0;
 }
+html {
+	scroll-behavior: smooth;
+}
 body {
 	padding: 5rem 1rem;
 	perspective: none;
@@ -15,11 +18,14 @@ body {
 .cont {
 	position: relative;
 	min-height: 100vh;
+	width: 80%;
+	margin-inline: auto;
 	display: grid;
 	gap: 5rem;
 	justify-items: center;
 	transform-style: preserve-3d;
 	perspective: none;
+
 	// background: #20202055;
 	// border: 10px solid red;
 
@@ -34,10 +40,14 @@ body {
 	// 	top: 0;
 	// }
 }
+img {
+	width: 100%;
+	backface-visibility: hidden;
+}
 .card {
-	--distance: 400px;
+	--distance: 600px;
 	position: relative;
-	width: min(400px, 100%);
+	width: min(500px, 100%);
 	aspect-ratio: 3/2;
 	transform-style: preserve-3d;
 	display: grid;
@@ -47,30 +57,53 @@ body {
 	text-align: center;
 	color: white;
 
-	&::before {
+	&:focus-visible {
+		outline: none;
+	}
+
+	// &::before {
+	// 	content: "";
+	// 	position: absolute;
+	// 	width: var(--distance);
+	// 	height: 20px;
+	// 	top: 50%;
+	// 	left: 50%;
+	// 	transform-origin: left center;
+	// 	rotate: y 90deg;
+	// 	translate: 0 -50%;
+	// background: green;
+	// }
+	&::after {
 		content: "";
 		position: absolute;
-		width: var(--distance);
-		height: 20px;
-		top: 50%;
-		left: 50%;
-		transform-origin: left center;
-		rotate: y 90deg;
-		translate: 0 -50%;
-		// background: green;
+		inset: 0;
+		transition: 0.3s;
+		outline: 10px solid transparent;
 	}
-}
-$num_of_cards_per_turn: 5;
-@for $i from 1 through $num_of_cards_per_turn {
-	// ul:nth-child(3n + #{$i}) {
-	// 	background-color: lighten(red, $i * 5%);
-	// }
-	.card:nth-child(#{$num_of_cards_per_turn"n+"$i}) {
-		rotate: y calc((#{$i} - 1) / $num_of_cards_per_turn * 360deg);
-		background-color: lighten(blue, $i * 5%);
-	}
-}
 
-.space {
+	&::after {
+		transform: translateZ(-20px);
+	}
+
+	&:is(:focus-visible, :hover)::after {
+		outline: 10px solid var(--color);
+		outline-offset: 10px;
+	}
+}
+$num_of_cards_per_turn: 6;
+@for $i from 1 through $num_of_cards_per_turn {
+	.card:nth-child(#{$num_of_cards_per_turn}n + #{$i}) {
+		rotate: y calc((#{$i} - 1) / $num_of_cards_per_turn * 360deg);
+	}
+}
+$total_number_of_cards: 12;
+@for $i from 1 through $total_number_of_cards {
+	.card:nth-child(#{$total_number_of_cards}n + #{$i}) {
+		// --color: lch(90% 100 #{($i - 1) * calc(360 / $total_number_of_cards)}deg);
+		--color: hsl(#{($i - 1) * calc(360 / $total_number_of_cards)}deg, 90%, 50%);
+		background-color: var(--color);
+	}
+}
+.spacer {
 	height: 600px;
 }

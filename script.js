@@ -2,7 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 let cont = document.querySelector(".cont");
 
-const number_of_items_per_turn = 5;
+const number_of_items_per_turn = 6;
 const total_number_of_items = 12;
 const num_of_cards_ratio = total_number_of_items / number_of_items_per_turn;
 

@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 5rem 1rem;
   perspective: none;
@@ -16,6 +20,8 @@ body {
 .cont {
   position: relative;
   min-height: 100vh;
+  width: 80%;
+  margin-inline: auto;
   display: grid;
   gap: 5rem;
   justify-items: center;
@@ -23,10 +29,15 @@ body {
   perspective: none;
 }
 
+img {
+  width: 100%;
+  backface-visibility: hidden;
+}
+
 .card {
-  --distance: 400px;
+  --distance: 600px;
   position: relative;
-  width: min(400px, 100%);
+  width: min(500px, 100%);
   aspect-ratio: 3/2;
   transform-style: preserve-3d;
   display: grid;
@@ -36,43 +47,110 @@ body {
   text-align: center;
   color: white;
 }
-.card::before {
+.card:focus-visible {
+  outline: none;
+}
+.card::after {
   content: "";
   position: absolute;
-  width: var(--distance);
-  height: 20px;
-  top: 50%;
-  left: 50%;
-  transform-origin: left center;
-  rotate: y 90deg;
-  translate: 0 -50%;
+  inset: 0;
+  transition: 0.3s;
+  outline: 10px solid transparent;
+}
+.card::after {
+  transform: translateZ(-20px);
+}
+.card:is(:focus-visible, :hover)::after {
+  outline: 10px solid var(--color);
+  outline-offset: 10px;
 }
 
-.card:nth-child(5n+1) {
-  rotate: y calc((1 - 1) / 5 * 360deg);
-  background-color: #1a1aff;
+.card:nth-child(6n+1) {
+  rotate: y calc((1 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(5n+2) {
-  rotate: y calc((2 - 1) / 5 * 360deg);
-  background-color: #3333ff;
+.card:nth-child(6n+2) {
+  rotate: y calc((2 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(5n+3) {
-  rotate: y calc((3 - 1) / 5 * 360deg);
-  background-color: #4d4dff;
+.card:nth-child(6n+3) {
+  rotate: y calc((3 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(5n+4) {
-  rotate: y calc((4 - 1) / 5 * 360deg);
-  background-color: #6666ff;
+.card:nth-child(6n+4) {
+  rotate: y calc((4 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(5n+5) {
-  rotate: y calc((5 - 1) / 5 * 360deg);
-  background-color: #8080ff;
+.card:nth-child(6n+5) {
+  rotate: y calc((5 - 1) / 6 * 360deg);
 }
 
-.space {
+.card:nth-child(6n+6) {
+  rotate: y calc((6 - 1) / 6 * 360deg);
+}
+
+.card:nth-child(12n+1) {
+  --color: hsl(0deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+2) {
+  --color: hsl(30deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+3) {
+  --color: hsl(60deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+4) {
+  --color: hsl(90deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+5) {
+  --color: hsl(120deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+6) {
+  --color: hsl(150deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+7) {
+  --color: hsl(180deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+8) {
+  --color: hsl(210deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+9) {
+  --color: hsl(240deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+10) {
+  --color: hsl(270deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+11) {
+  --color: hsl(300deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.card:nth-child(12n+12) {
+  --color: hsl(330deg, 90%, 50%);
+  background-color: var(--color);
+}
+
+.spacer {
   height: 600px;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
