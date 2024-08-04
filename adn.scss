@@ -15,16 +15,19 @@ body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.cont {
+.spacer {
+	height: 600px;
+}
+.adn-cont {
 	position: relative;
-	min-height: 100vh;
 	width: 80%;
 	margin-inline: auto;
 	display: grid;
-	gap: 5rem;
+	grid-template-columns: 1fr;
 	justify-items: center;
 	transform-style: preserve-3d;
 	perspective: none;
+	rotate: x 10deg;
 
 	// background: #20202055;
 	// border: 10px solid red;
@@ -39,16 +42,33 @@ body {
 	// 	right: 50%;
 	// 	top: 0;
 	// }
+
+	// animation: rotate 6s linear infinite;
+
+	& .helix {
+		grid-column: 1;
+		grid-row: 1;
+	}
 }
-img {
-	width: 100%;
-	backface-visibility: hidden;
+.cont {
+	margin-inline: auto;
+	display: grid;
+	gap: 3rem;
+	gap: 0;
+	justify-items: center;
+	transform-style: preserve-3d;
+	perspective: none;
 }
-.cont .card {
-	--distance: 600px;
+@keyframes rotate {
+	to {
+		transform: rotateY(360deg);
+	}
+}
+.adn-cont .card {
+	--distance: 300px;
 	position: relative;
-	width: min(500px, 100%);
-	aspect-ratio: 3/2;
+	width: initial;
+	aspect-ratio: 1;
 	transform-style: preserve-3d;
 	display: grid;
 	place-content: center;
@@ -56,46 +76,42 @@ img {
 	transform: translateZ(var(--distance));
 	text-align: center;
 	color: white;
+	background: white;
+	padding: 1rem;
+	border: 5px solid black;
+	border-radius: 1rem;
 
-	&:focus-visible {
-		outline: none;
-	}
-
-	// &::before {
-	// 	content: "";
-	// 	position: absolute;
-	// 	width: var(--distance);
-	// 	height: 20px;
-	// 	top: 50%;
-	// 	left: 50%;
-	// 	transform-origin: left center;
-	// 	rotate: y 90deg;
-	// 	translate: 0 -50%;
-	// background: green;
-	// }
-	&::after {
+	&::before {
 		content: "";
 		position: absolute;
-		inset: 0;
-		transition: 0.3s;
-		outline: 10px solid transparent;
-	}
-
-	&::after {
-		transform: translateZ(-20px);
-	}
-
-	&:is(:focus-visible, :hover)::after {
-		outline: 10px solid var(--color);
-		outline-offset: 10px;
+		width: calc(var(--distance) * 2);
+		height: 20px;
+		top: 50%;
+		left: 50%;
+		transform-origin: left center;
+		rotate: y 90deg;
+		translate: 0 -50%;
+		background: darkblue;
 	}
 }
-$num_of_cards_per_turn: 6;
-@for $i from 1 through $num_of_cards_per_turn {
-	.cont .card:nth-child(#{$num_of_cards_per_turn}n + #{$i}) {
-		rotate: y calc((#{$i} - 1) / $num_of_cards_per_turn * 360deg);
+
+$num_of_cards_per_turn: 12;
+$num_of_columns: 2;
+@for $n from 1 through $num_of_columns {
+	@for $i from 1 through $num_of_cards_per_turn {
+		.cont:nth-child(#{$n}) .card:nth-child(#{$num_of_cards_per_turn}n + #{$i}) {
+			rotate: y
+				calc(
+					(#{$i} - 1) /
+						$num_of_cards_per_turn *
+						360deg +
+						#{($n / $num_of_columns) *
+						360deg}
+				);
+		}
 	}
 }
+
 $total_number_of_cards: 12;
 @for $i from 1 through $total_number_of_cards {
 	.card:nth-child(#{$total_number_of_cards}n + #{$i}) {
@@ -104,6 +120,10 @@ $total_number_of_cards: 12;
 		background-color: var(--color);
 	}
 }
-.spacer {
-	height: 600px;
+
+img {
+	width: 150px;
+	aspect-ratio: 1;
+	backface-visibility: hidden;
+	opacity: 0;
 }

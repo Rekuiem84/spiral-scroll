@@ -34,7 +34,7 @@ img {
   backface-visibility: hidden;
 }
 
-.card {
+.cont .card {
   --distance: 600px;
   position: relative;
   width: min(500px, 100%);
@@ -47,45 +47,45 @@ img {
   text-align: center;
   color: white;
 }
-.card:focus-visible {
+.cont .card:focus-visible {
   outline: none;
 }
-.card::after {
+.cont .card::after {
   content: "";
   position: absolute;
   inset: 0;
   transition: 0.3s;
   outline: 10px solid transparent;
 }
-.card::after {
+.cont .card::after {
   transform: translateZ(-20px);
 }
-.card:is(:focus-visible, :hover)::after {
+.cont .card:is(:focus-visible, :hover)::after {
   outline: 10px solid var(--color);
   outline-offset: 10px;
 }
 
-.card:nth-child(6n+1) {
+.cont .card:nth-child(6n+1) {
   rotate: y calc((1 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(6n+2) {
+.cont .card:nth-child(6n+2) {
   rotate: y calc((2 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(6n+3) {
+.cont .card:nth-child(6n+3) {
   rotate: y calc((3 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(6n+4) {
+.cont .card:nth-child(6n+4) {
   rotate: y calc((4 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(6n+5) {
+.cont .card:nth-child(6n+5) {
   rotate: y calc((5 - 1) / 6 * 360deg);
 }
 
-.card:nth-child(6n+6) {
+.cont .card:nth-child(6n+6) {
   rotate: y calc((6 - 1) / 6 * 360deg);
 }
 
@@ -151,6 +151,4 @@ img {
 
 .spacer {
   height: 600px;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
